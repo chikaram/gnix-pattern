@@ -1,5 +1,5 @@
 <?php
-require_once '/data/App/tests/init.php';
+require_once '/path/to/gnix-pattern/tests/init.php';
 
 class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
 {
