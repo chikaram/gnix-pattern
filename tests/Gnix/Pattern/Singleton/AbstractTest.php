@@ -81,6 +81,19 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('bar', $sampleD->getString());
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testCheckSameD()
+    {
+        $sampleD1 = Gnix_Pattern_Singleton_AbstractTest_SampleD::getInstance();
+        $sampleD2 = Gnix_Pattern_Singleton_AbstractTest_SampleD::getInstance();
+        $sampleD3 = Gnix_Pattern_Singleton_AbstractTest_SampleD::getInstance();
+
+        $this->assertSame($sampleD1, $sampleD2);
+        $this->assertSame($sampleD2, $sampleD3);
+    }
 }
 
 /**
