@@ -116,3 +116,7 @@ class Gnix_Pattern_Singleton_AbstractTest_SampleD extends Gnix_Pattern_Singleton
         $this->_string = 'bar';
     }
 }
+
+class Gnix_Pattern_Singleton_AbstractTest_SampleE
+{
+}
