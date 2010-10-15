@@ -8,10 +8,10 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testGetInstanceA()
     {
-        $sampleA = Sample_A::getInstance();
+        $sampleA = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
 
         $this->assertType('Gnix_Pattern_Singleton_Abstract', $sampleA);
-        $this->assertType('Sample_A', $sampleA);
+        $this->assertType('Gnix_Pattern_Singleton_AbstractTest_SampleA', $sampleA);
     }
 
     /**
@@ -19,10 +19,10 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testGetInstanceB()
     {
-        $sampleB = Sample_B::getInstance();
+        $sampleB = Gnix_Pattern_Singleton_AbstractTest_SampleB::getInstance();
 
         $this->assertType('Gnix_Pattern_Singleton_Abstract', $sampleB);
-        $this->assertType('Sample_B', $sampleB);
+        $this->assertType('Gnix_Pattern_Singleton_AbstractTest_SampleB', $sampleB);
     }
 
     /**
@@ -30,9 +30,9 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckSameA()
     {
-        $sampleA1 = Sample_A::getInstance();
-        $sampleA2 = Sample_A::getInstance();
-        $sampleA3 = Sample_A::getInstance();
+        $sampleA1 = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
+        $sampleA2 = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
+        $sampleA3 = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
 
         $this->assertSame($sampleA1, $sampleA2);
         $this->assertSame($sampleA2, $sampleA3);
@@ -43,9 +43,9 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckSameB()
     {
-        $sampleB1 = Sample_B::getInstance();
-        $sampleB2 = Sample_B::getInstance();
-        $sampleB3 = Sample_B::getInstance();
+        $sampleB1 = Gnix_Pattern_Singleton_AbstractTest_SampleB::getInstance();
+        $sampleB2 = Gnix_Pattern_Singleton_AbstractTest_SampleB::getInstance();
+        $sampleB3 = Gnix_Pattern_Singleton_AbstractTest_SampleB::getInstance();
 
         $this->assertSame($sampleB1, $sampleB2);
         $this->assertSame($sampleB2, $sampleB3);
@@ -56,8 +56,8 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckNotSame()
     {
-        $sampleA = Sample_A::getInstance();
-        $sampleB = Sample_B::getInstance();
+        $sampleA = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
+        $sampleB = Gnix_Pattern_Singleton_AbstractTest_SampleB::getInstance();
 
         $this->assertNotSame($sampleA, $sampleB);
     }
@@ -67,30 +67,52 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckConstructor()
     {
-        $sampleB = Sample_B::getInstance();
+        $sampleC = Gnix_Pattern_Singleton_AbstractTest_SampleC::getInstance();
 
-        $this->assertSame('abc', $sampleB->getString());
+        $this->assertSame('foo', $sampleC->getString());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testGetInstanceD()
+    {
+        $sampleD = Gnix_Pattern_Singleton_AbstractTest_SampleD::getInstance();
+
+        $this->assertSame('bar', $sampleD->getString());
     }
 }
 
 /**
  * Classes for testing Gnix_Pattern_Singleton_AbstractTest
  */
-class Sample_A extends Gnix_Pattern_Singleton_Abstract
+class Gnix_Pattern_Singleton_AbstractTest_SampleA extends Gnix_Pattern_Singleton_Abstract
 {
 }
 
-class Sample_B extends Gnix_Pattern_Singleton_Abstract
+class Gnix_Pattern_Singleton_AbstractTest_SampleB extends Gnix_Pattern_Singleton_Abstract
 {
-    private $_string;
+}
+
+class Gnix_Pattern_Singleton_AbstractTest_SampleC extends Gnix_Pattern_Singleton_Abstract
+{
+    protected $_string;
 
     protected function __construct()
     {
-        $this->_string = 'abc';
+        $this->_string = 'foo';
     }
 
     public function getString()
     {
         return $this->_string;
+    }
+}
+
+class Gnix_Pattern_Singleton_AbstractTest_SampleD extends Gnix_Pattern_Singleton_AbstractTest_SampleC
+{
+    protected function __construct()
+    {
+        $this->_string = 'bar';
     }
 }
