@@ -28,6 +28,29 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
+    public function testGetInstanceC()
+    {
+        $sampleC = Gnix_Pattern_Singleton_AbstractTest_SampleC::getInstance();
+
+        $this->assertType('Gnix_Pattern_Singleton_Abstract', $sampleC);
+        $this->assertType('Gnix_Pattern_Singleton_AbstractTest_SampleC', $sampleC);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testGetInstanceD()
+    {
+        $sampleD = Gnix_Pattern_Singleton_AbstractTest_SampleD::getInstance();
+
+        $this->assertType('Gnix_Pattern_Singleton_Abstract', $sampleD);
+        $this->assertType('Gnix_Pattern_Singleton_AbstractTest_SampleC', $sampleD);
+        $this->assertType('Gnix_Pattern_Singleton_AbstractTest_SampleD', $sampleD);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
     public function testCheckSameA()
     {
         $sampleA1 = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
@@ -54,32 +77,14 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testCheckNotSame()
+    public function testCheckSameC()
     {
-        $sampleA = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
-        $sampleB = Gnix_Pattern_Singleton_AbstractTest_SampleB::getInstance();
+        $sampleC1 = Gnix_Pattern_Singleton_AbstractTest_SampleC::getInstance();
+        $sampleC2 = Gnix_Pattern_Singleton_AbstractTest_SampleC::getInstance();
+        $sampleC3 = Gnix_Pattern_Singleton_AbstractTest_SampleC::getInstance();
 
-        $this->assertNotSame($sampleA, $sampleB);
-    }
-
-    /**
-     * @runInSeparateProcess
-     */
-    public function testCheckConstructor()
-    {
-        $sampleC = Gnix_Pattern_Singleton_AbstractTest_SampleC::getInstance();
-
-        $this->assertSame('foo', $sampleC->getString());
-    }
-
-    /**
-     * @runInSeparateProcess
-     */
-    public function testGetInstanceD()
-    {
-        $sampleD = Gnix_Pattern_Singleton_AbstractTest_SampleD::getInstance();
-
-        $this->assertSame('bar', $sampleD->getString());
+        $this->assertSame($sampleC1, $sampleC2);
+        $this->assertSame($sampleC2, $sampleC3);
     }
 
     /**
@@ -93,6 +98,37 @@ class Gnix_Pattern_Singleton_AbstractTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($sampleD1, $sampleD2);
         $this->assertSame($sampleD2, $sampleD3);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testCheckNotSame()
+    {
+        $sampleA = Gnix_Pattern_Singleton_AbstractTest_SampleA::getInstance();
+        $sampleB = Gnix_Pattern_Singleton_AbstractTest_SampleB::getInstance();
+
+        $this->assertNotSame($sampleA, $sampleB);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testCheckConstructorC()
+    {
+        $sampleC = Gnix_Pattern_Singleton_AbstractTest_SampleC::getInstance();
+
+        $this->assertSame('foo', $sampleC->getString());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testCheckConstructorD()
+    {
+        $sampleD = Gnix_Pattern_Singleton_AbstractTest_SampleD::getInstance();
+
+        $this->assertSame('bar', $sampleD->getString());
     }
 }
 
