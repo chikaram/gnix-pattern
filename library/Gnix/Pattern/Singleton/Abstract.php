@@ -1,6 +1,6 @@
 <?php
 /**
- * Refer to the link below:
+ * Please refer to the link below:
  * http://talks.php.net/show/phpjp10/10
  */
 abstract class Gnix_Pattern_Singleton_Abstract
